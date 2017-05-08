@@ -1,0 +1,34 @@
+{
+  "name": "gh-bootstrap",
+  "version": "0.0.0",
+  "description": "A CLI for bootstrapping GitHub repositories",
+  "main": "bin/cli.js",
+  "bin": {
+    "gh-bootstrap": "bin/cli.js"
+  },
+  "scripts": {
+    "pretest": "eslint bin lib test",
+    "test": "tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emilymdubois/gh-bootstrap.git"
+  },
+  "author": "Emily DuBois",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emilymdubois/gh-bootstrap/issues"
+  },
+  "homepage": "https://github.com/emilymdubois/gh-bootstrap#readme",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-plugin-node": "^4.2.2"
+  },
+  "dependencies": {
+    "async": "^2.3.0",
+    "d3-queue": "^3.0.5",
+    "inquirer": "^3.0.6",
+    "meow": "^3.7.0",
+    "request": "^2.81.0"
+  }
+}
