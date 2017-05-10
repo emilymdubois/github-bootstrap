@@ -23,23 +23,23 @@ const labels = {
   }
 };
 
-test('[make-config] [fileDoesNotExist]', (t) => {
+test('[make-config] [confirmFileCreation]', (t) => {
   const stat = sinon.stub(fs, 'stat');
   const prompt = sinon.stub(inquirer, 'prompt');
 
-  t.test('[make-config] [fileDoesNotExist] fs.stat error', (assert) => {
+  t.test('[make-config] [confirmFileCreation] fs.stat error', (assert) => {
     stat.onCall(0).yields(error);
-    file.fileDoesNotExist(filename, (err, res) => {
+    file.confirmFileCreation(filename, (err, res) => {
       assert.ok(/^.*config-test.json$/.test(stat.getCall(0).args[0]), 'fs.stat argument should contain filename');
       assert.ifError(err || res, 'should not accept callback parameters');
       assert.end();
     });
   });
 
-  t.test('[make-config] [fileDoesNotExist] inquirer.prompt no confirmation', (assert) => {
+  t.test('[make-config] [confirmFileCreation] inquirer.prompt no confirmation', (assert) => {
     stat.onCall(1).yields(null, success);
     prompt.onCall(0).returns(Promise.resolve({ OverrideConfig: false }));
-    file.fileDoesNotExist(filename, (err, res) => {
+    file.confirmFileCreation(filename, (err, res) => {
       assert.ok(/^.*config-test.json$/.test(stat.getCall(1).args[0]), 'fs.stat argument should contain filename');
       assert.deepEqual(prompt.getCall(0).args[0], [{
         default: false,
@@ -53,10 +53,10 @@ test('[make-config] [fileDoesNotExist]', (t) => {
     });
   });
 
-  t.test('[make-config] [fileDoesNotExist] inquirer.prompt confirmation', (assert) => {
+  t.test('[make-config] [confirmFileCreation] inquirer.prompt confirmation', (assert) => {
     stat.onCall(2).yields(null, success);
     prompt.onCall(1).returns(Promise.resolve({ OverrideConfig: true }));
-    file.fileDoesNotExist(filename, (err, res) => {
+    file.confirmFileCreation(filename, (err, res) => {
       assert.ok(/^.*config-test.json$/.test(stat.getCall(1).args[0]), 'fs.stat argument should contain filename');
       assert.deepEqual(prompt.getCall(0).args[0], [{
         default: false,
@@ -69,7 +69,7 @@ test('[make-config] [fileDoesNotExist]', (t) => {
     });
   });
 
-  t.test('[make-config] [fileDoesNotExist] restore', (assert) => {
+  t.test('[make-config] [confirmFileCreation] restore', (assert) => {
     fs.stat.restore();
     inquirer.prompt.restore();
     assert.end();
