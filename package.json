@@ -22,10 +22,11 @@
   "homepage": "https://github.com/emilymdubois/gh-bootstrap#readme",
   "devDependencies": {
     "eslint": "^3.19.0",
-    "eslint-plugin-node": "^4.2.2"
+    "eslint-plugin-node": "^4.2.2",
+    "sinon": "^2.2.0",
+    "tape": "^4.6.3"
   },
   "dependencies": {
-    "async": "^2.3.0",
     "d3-queue": "^3.0.5",
     "inquirer": "^3.0.6",
     "meow": "^3.7.0",

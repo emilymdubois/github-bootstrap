@@ -20,10 +20,11 @@ const cli = meow({
   description: 'A CLI for bootstrapping GitHub labels'
 }, {
   alias: {
-    f: 'file',
+    o: 'owner',
+    r: 'repo',
     t: 'token'
   },
-  string: ['file', 'token']
+  string: ['owner', 'repo', 'token']
 });
 
 const command = cli.input[0];
@@ -31,11 +32,11 @@ const command = cli.input[0];
 let fn;
 try { fn = require(`../lib/${command}`); }
 catch (err) {
-  console.error(err.message);
+  console.error(`\n${err.message}\n`);
   cli.showHelp(1);
 }
 
 fn(cli.flags, (err, res) => {
-  if (err) console.log(err.message);
-  console.log(res);
+  if (err) console.log(`\n${err.message}\n`);
+  if (res) console.log(`\n${res}\n`);
 });
